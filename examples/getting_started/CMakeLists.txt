@@ -43,3 +43,15 @@ target_link_libraries(HelloTriangle_02
 		ogl
 		ogl_CompileOptions
 )
+
+add_executable(HelloTriangle_03
+	${CMAKE_CURRENT_SOURCE_DIR}/hello_triangle_03.cpp
+)
+
+target_link_libraries(HelloTriangle_03
+	PRIVATE
+		glad::glad
+
+		ogl
+		ogl_CompileOptions
+)
