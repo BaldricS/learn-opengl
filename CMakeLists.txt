@@ -21,6 +21,7 @@ set(PRIVATE_DIR ${SRC_DIR}/private)
 add_library(ogl
 	${HEADER_DIR}/Buffer.h
 	${HEADER_DIR}/RenderWindow.h
+	${HEADER_DIR}/Shader.h
 	${HEADER_DIR}/VertexArray.h
 
 	${PRIVATE_DIR}/RenderContext.h
@@ -28,6 +29,7 @@ add_library(ogl
 	${SRC_DIR}/Buffer.cpp
 	${SRC_DIR}/RenderContext.cpp
 	${SRC_DIR}/RenderWindow.cpp
+	${SRC_DIR}/Shader.cpp
 	${SRC_DIR}/VertexArray.cpp
 )
 

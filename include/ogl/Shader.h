@@ -1,6 +1,8 @@
 #pragma once
 
-#include <ogl/ShaderType.h>
+#include "ogl/ShaderType.h"
+
+#include <string>
 
 namespace ogl
 {

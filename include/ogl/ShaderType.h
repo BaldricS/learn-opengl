@@ -2,7 +2,7 @@
 
 namespace ogl
 {
-    class enum ShaderType
+    enum class ShaderType
     {
         Fragment,
         Vertex

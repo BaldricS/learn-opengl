@@ -7,7 +7,7 @@ namespace ogl
     class Buffer
     {
     public:
-        explicit Buffer(BufferType bufferType = ArrayBuffer);
+        explicit Buffer(BufferType bufferType = BufferType::ArrayBuffer);
 
         Buffer(Buffer const &) = delete;
 

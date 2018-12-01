@@ -28,7 +28,7 @@ namespace ogl
     {
     }
 
-    Shader(Shader && other) :
+    Shader::Shader(Shader && other) :
         shader(std::exchange(other.shader, 0))
     {
     }
@@ -47,13 +47,13 @@ namespace ogl
 
     void Shader::compile(std::string const & source)
     {
-        char * const src = source.c_str();
+        char const * const src = source.c_str();
 
         glShaderSource(shader, 1, &src, NULL);
         glCompileShader(shader);
 
         int compileStatus;
-        glGetShaderiv(shader, GL_COMPILE_STATUS, compileStatus);
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &compileStatus);
 
         if(compileStatus == GL_TRUE)
         {
@@ -61,7 +61,7 @@ namespace ogl
         }
 
         int logLength;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, logLength);
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
 
         std::string log;
         log.resize(logLength);

@@ -2,8 +2,9 @@
 
 namespace ogl
 {
-    enum class BufferType
+    class Program
     {
-        ArrayBuffer
+    public:
+    private:
     };
 }
