@@ -23,6 +23,7 @@ add_library(ogl
 	${HEADER_DIR}/Program.h
 	${HEADER_DIR}/RenderWindow.h
 	${HEADER_DIR}/Shader.h
+	${HEADER_DIR}/Uniform.h
 	${HEADER_DIR}/VertexArray.h
 
 	${HEADER_DIR}/utils/MainMacro.h
@@ -44,9 +45,10 @@ find_package(glad REQUIRED)
 find_package(glfw3 REQUIRED)
 
 target_link_libraries(ogl
-	PRIVATE
+	PUBLIC
 		glad::glad
 
+	PRIVATE
 		glfw
 
 		ogl_CompileOptions
