@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 
 #include <stdexcept>
+#include <utility>
 
 namespace
 {
@@ -39,7 +40,21 @@ namespace ogl
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     }
 
+    RenderWindow::RenderWindow(RenderWindow && other) :
+        window(std::exchange(other.window, nullptr)),
+        context(std::exchange(other.context, nullptr))
+    {
+    }
+
     RenderWindow::~RenderWindow() = default;
+
+    RenderWindow & RenderWindow::operator=(RenderWindow && other)
+    {
+        window = std::exchange(other.window, nullptr);
+        context = std::exchange(other.context, nullptr);
+
+        return *this;
+    }
 
     void RenderWindow::run() const
     {

@@ -13,7 +13,15 @@ namespace ogl
     public:
         explicit RenderWindow(int majorVersion = 3, int minorVersion = 3, int width = 800, int height = 600);
         
+        RenderWindow(RenderWindow const &) = delete;
+
+        RenderWindow(RenderWindow && other);
+        
         ~RenderWindow();
+
+        RenderWindow & operator=(RenderWindow const &) = delete;
+
+        RenderWindow & operator=(RenderWindow && other);
 
         void run() const;
 
