@@ -1,6 +1,5 @@
 #include "ogl/Buffer.h"
 
-#include <iostream>
 #include <stdexcept>
 #include <utility>
 
@@ -46,8 +45,6 @@ namespace ogl
 
     void Buffer::load_data(void * data, std::size_t sizeInBytes, BufferUsage bufferUsage)
     {
-        std::cout << sizeInBytes << std::endl;
-
         glBufferData(
             bufferType,
             static_cast<GLsizeiptr>(sizeInBytes),
