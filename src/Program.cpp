@@ -2,8 +2,6 @@
 
 #include "ogl/Shader.h"
 
-#include <glad/glad.h>
-
 #include <stdexcept>
 #include <utility>
 
@@ -41,7 +39,7 @@ namespace ogl
         glUseProgram(program);
     }
 
-    unsigned int Program::handle() const
+    GLuint Program::handle() const
     {
         return program;
     }
@@ -50,7 +48,7 @@ namespace ogl
     {
         glLinkProgram(program);
 
-        int success;
+        GLint success;
         glGetProgramiv(program, GL_LINK_STATUS, &success);
 
         if (success == GL_TRUE)
@@ -58,7 +56,7 @@ namespace ogl
             return;
         }
 
-        int logLength;
+        GLint logLength;
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
 
         std::string log;

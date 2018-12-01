@@ -1,30 +1,12 @@
 #include "ogl/Shader.h"
 
-#include <glad/glad.h>
-
 #include <stdexcept>
 #include <utility>
-
-namespace
-{
-    GLenum translateShaderType(ogl::ShaderType shaderType)
-    {
-        switch (shaderType)
-        {
-            case ogl::ShaderType::Fragment:
-                return GL_FRAGMENT_SHADER;
-            case ogl::ShaderType::Vertex:
-                return GL_VERTEX_SHADER;
-            default:
-                throw std::invalid_argument("Unhandled shader type.");
-        }
-    }
-}
 
 namespace ogl
 {
     Shader::Shader(ShaderType shaderType) :
-        shader(glCreateShader(translateShaderType(shaderType)))
+        shader(glCreateShader(static_cast<GLenum>(shaderType)))
     {
     }
 
@@ -58,7 +40,7 @@ namespace ogl
         glShaderSource(shader, 1, &src, NULL);
         glCompileShader(shader);
 
-        int compileStatus;
+        GLint compileStatus;
         glGetShaderiv(shader, GL_COMPILE_STATUS, &compileStatus);
 
         if(compileStatus == GL_TRUE)
@@ -66,7 +48,7 @@ namespace ogl
             return;
         }
 
-        int logLength;
+        GLint logLength;
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
 
         std::string log;
@@ -77,7 +59,7 @@ namespace ogl
         throw std::runtime_error("Could not compile shader. Error Message: " + log);
     }
 
-    unsigned int Shader::handle() const
+    GLuint Shader::handle() const
     {
         return shader;
     }

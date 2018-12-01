@@ -2,6 +2,8 @@
 
 #include "ogl/ShaderType.h"
 
+#include <glad/glad.h>
+
 #include <string>
 
 namespace ogl
@@ -25,9 +27,9 @@ namespace ogl
 
         void compile(std::string const & source);
 
-        unsigned int handle() const;
+        GLuint handle() const;
 
     private:
-        unsigned int shader = 0;
+        GLuint shader = 0;
     };
 }

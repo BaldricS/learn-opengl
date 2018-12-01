@@ -1,10 +1,12 @@
 #pragma once
 
+#include <glad/glad.h>
+
 namespace ogl
 {
     enum class BufferType
     {
-        ArrayBuffer,
-        ElementArrayBuffer
+        ArrayBuffer = GL_ARRAY_BUFFER,
+        ElementArrayBuffer = GL_ELEMENT_ARRAY_BUFFER
     };
 }

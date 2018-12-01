@@ -3,6 +3,8 @@
 #include "ogl/BufferType.h"
 #include "ogl/BufferUsage.h"
 
+#include <glad/glad.h>
+
 #include <vector>
 
 namespace ogl
@@ -24,7 +26,7 @@ namespace ogl
 
         void bind();
 
-        unsigned int handle() const;
+        GLuint handle() const;
 
         template<typename T>
         void load_data(std::vector<T> const & d, BufferUsage usage = BufferUsage::Static)
@@ -35,9 +37,9 @@ namespace ogl
         void unbind();
 
     private:
-        unsigned int bufferType;
+        GLenum bufferType;
 
-        unsigned int vbo = 0;
+        GLuint vbo = 0;
 
         void load_data(void * data, std::size_t sizeInBytes, BufferUsage usage);
     };

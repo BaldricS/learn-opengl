@@ -1,7 +1,5 @@
 #include "ogl/VertexArray.h"
 
-#include <glad/glad.h>
-
 #include <utility>
 
 namespace ogl
@@ -33,7 +31,7 @@ namespace ogl
         glBindVertexArray(vao);
     }
 
-    unsigned int VertexArray::handle() const
+    GLuint VertexArray::handle() const
     {
         return vao;
     }

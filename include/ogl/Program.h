@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glad/glad.h>
+
 namespace ogl
 {
     class Shader;
@@ -23,13 +25,13 @@ namespace ogl
 
         void bind();
 
-        unsigned int handle() const;
+        GLuint handle() const;
 
         void link();
 
         void unbind();
 
     private:
-        unsigned int program;
+        GLuint program;
     };
 }

@@ -1,46 +1,13 @@
 #include "ogl/Buffer.h"
 
-#include <glad/glad.h>
-
 #include <iostream>
 #include <stdexcept>
 #include <utility>
 
-namespace
-{
-    GLenum translateBufferType(ogl::BufferType type)
-    {
-        switch (type)
-        {
-            case ogl::BufferType::ArrayBuffer:
-                return GL_ARRAY_BUFFER;
-            case ogl::BufferType::ElementArrayBuffer:
-                return GL_ELEMENT_ARRAY_BUFFER;
-            default:
-                throw std::invalid_argument("Unhandle buffer type.");
-        }
-    }
-
-    GLenum translateBufferUsage(ogl::BufferUsage usage)
-    {
-        switch(usage)
-        {
-            case ogl::BufferUsage::Static:
-                return GL_STATIC_DRAW;
-            case ogl::BufferUsage::Stream:
-                return GL_STREAM_DRAW;
-            case ogl::BufferUsage::Dynamic:
-                return GL_DYNAMIC_DRAW;
-            default:
-                throw std::invalid_argument("Unhandle usage type.");
-        }
-    }
-}
-
 namespace ogl
 {
     Buffer::Buffer(BufferType bufferType_) :
-        bufferType(translateBufferType(bufferType_))
+        bufferType(static_cast<GLenum>(bufferType_))
     {
         glGenBuffers(1, &vbo);
     }
@@ -83,7 +50,7 @@ namespace ogl
             bufferType,
             static_cast<GLsizeiptr>(sizeInBytes),
             data,
-            translateBufferUsage(bufferUsage)
+            static_cast<GLenum>(bufferUsage)
         );
     }
 }

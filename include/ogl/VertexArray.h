@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glad/glad.h>
+
 namespace ogl
 {
     class VertexArray
@@ -19,11 +21,11 @@ namespace ogl
 
         void bind();
 
-        unsigned int handle() const;
+        GLuint handle() const;
     
         void unbind();
 
     private:
-        unsigned int vao = 0;
+        GLuint vao = 0;
     };
 }
