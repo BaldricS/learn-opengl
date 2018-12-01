@@ -2,6 +2,8 @@
 
 namespace ogl
 {
+    class Shader;
+    
     class Program
     {
     public:
@@ -17,7 +19,7 @@ namespace ogl
 
         Program & operator=(Program && other);
 
-        void add_program(Shader const & shader);
+        void add_shader(Shader const & shader);
 
         unsigned int handle() const;
 
