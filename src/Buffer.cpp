@@ -14,6 +14,8 @@ namespace
         {
             case ogl::BufferType::ArrayBuffer:
                 return GL_ARRAY_BUFFER;
+            case ogl::BufferType::ElementArrayBuffer:
+                return GL_ELEMENT_ARRAY_BUFFER;
             default:
                 throw std::invalid_argument("Unhandle buffer type.");
         }

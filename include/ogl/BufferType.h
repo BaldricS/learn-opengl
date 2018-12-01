@@ -4,6 +4,7 @@ namespace ogl
 {
     enum class BufferType
     {
-        ArrayBuffer
+        ArrayBuffer,
+        ElementArrayBuffer
     };
 }
