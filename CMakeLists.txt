@@ -19,10 +19,12 @@ set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 set(PRIVATE_DIR ${SRC_DIR}/private)
 
 add_library(ogl
+	${HEADER_DIR}/Buffer.h
 	${HEADER_DIR}/RenderWindow.h
 
 	${PRIVATE_DIR}/RenderContext.h
 
+	${SRC_DIR}/Buffer.cpp
 	${SRC_DIR}/RenderContext.cpp
 	${SRC_DIR}/RenderWindow.cpp
 )
@@ -31,9 +33,10 @@ find_package(glad REQUIRED)
 find_package(glfw3 REQUIRED)
 
 target_link_libraries(ogl
-	PRIVATE
+	PUBLIC
 		glad::glad
 
+	PRIVATE
 		glfw
 
 		logl_CompileOptions
