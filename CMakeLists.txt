@@ -30,9 +30,11 @@ add_library(ogl
 	${HEADER_DIR}/utils/ProgramFactory.h
 	${HEADER_DIR}/utils/ScopedBind.h
 
+	${PRIVATE_DIR}/ImageHandle.h
 	${PRIVATE_DIR}/RenderContext.h
 
 	${SRC_DIR}/Buffer.cpp
+	${SRC_DIR}/ImageHandle.cpp
 	${SRC_DIR}/Program.cpp
 	${SRC_DIR}/ProgramFactory.cpp
 	${SRC_DIR}/RenderContext.cpp
@@ -43,6 +45,7 @@ add_library(ogl
 
 find_package(glad REQUIRED)
 find_package(glfw3 REQUIRED)
+find_package(stb REQUIRED)
 
 target_link_libraries(ogl
 	PUBLIC
@@ -52,6 +55,8 @@ target_link_libraries(ogl
 		glfw
 
 		ogl_CompileOptions
+
+		stb::stb
 )
 
 target_include_directories(ogl
