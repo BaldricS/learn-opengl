@@ -35,6 +35,8 @@ namespace ogl
         glViewport(0, 0, width, height);
 
         glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     }
 
     RenderWindow::~RenderWindow() = default;
@@ -45,6 +47,8 @@ namespace ogl
         {
             glfwSwapBuffers(window);
             glfwPollEvents();
+
+            glClear(GL_COLOR_BUFFER_BIT);
         }
     }
 }
