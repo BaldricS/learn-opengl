@@ -17,6 +17,21 @@ namespace
                 throw std::invalid_argument("Unhandle buffer type.");
         }
     }
+
+    GLenum translateBufferUsage(ogl::BufferUsage usage)
+    {
+        switch(usage)
+        {
+            case ogl::BufferUsage::Static:
+                return GL_STATIC_DRAW;
+            case ogl::BufferUsage::Stream:
+                return GL_STREAM_DRAW;
+            case ogl::BufferUsage::Dynamic:
+                return GL_DYNAMIC_DRAW;
+            default:
+                throw std::invalid_argument("Unhandle usage type.");
+        }
+    }
 }
 
 namespace ogl
@@ -57,5 +72,15 @@ namespace ogl
     void Buffer::unbind()
     {
         glBindBuffer(bufferType, 0);
+    }
+
+    void Buffer::load_data(void * data, std::size_t sizeInBytes, BufferUsage bufferUsage)
+    {
+        glBufferData(
+            vbo,
+            static_cast<GLsizeiptr>(sizeInBytes),
+            data,
+            translateBufferUsage(bufferUsage)
+        );
     }
 }
