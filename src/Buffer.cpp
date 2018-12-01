@@ -48,14 +48,14 @@ namespace ogl
     {
         glBindBuffer(bufferType, vbo);
     }
+    
+    GLuint Buffer::handle() const
+    {
+        return vbo;
+    }
 
     void Buffer::unbind()
     {
         glBindBuffer(bufferType, 0);
-    }
-
-    GLuint Buffer::handle() const
-    {
-        return vbo;
     }
 }

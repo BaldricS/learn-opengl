@@ -21,9 +21,9 @@ namespace ogl
 
         void bind();
 
-        void unbind();
-
         unsigned int handle() const;
+
+        void unbind();
 
     private:
         unsigned int bufferType;
