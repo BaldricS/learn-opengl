@@ -20,7 +20,7 @@ namespace ogl
     RenderWindow::RenderWindow(int majorVersion, int minorVersion, int width, int height) :
         context(new RenderContext(majorVersion, minorVersion))
     {
-        window = glfwCreateWindow(width, height, "Render Window", nullptr, nullptr);
+        window = glfwCreateWindow(width, height, "Render Window", NULL, NULL);
         if (window == nullptr)
         {
             throw std::runtime_error("Failed to create GLFW window");

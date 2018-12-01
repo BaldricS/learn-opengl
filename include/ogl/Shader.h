@@ -24,6 +24,6 @@ namespace ogl
         unsigned int handle() const;
 
     private:
-        unsigned int shader;
+        unsigned int shader = 0;
     };
 }

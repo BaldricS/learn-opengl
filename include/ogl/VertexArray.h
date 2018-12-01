@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace ogl
 {
     class VertexArray
@@ -25,6 +24,6 @@ namespace ogl
         void unbind();
 
     private:
-        unsigned int vao;
+        unsigned int vao = 0;
     };
 }

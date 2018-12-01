@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 
+#include <stdexcept>
 #include <utility>
 
 namespace
@@ -13,7 +14,7 @@ namespace
             case ogl::BufferType::ArrayBuffer:
                 return GL_ARRAY_BUFFER;
             default:
-                throw std::runtime_error("Unhandle buffer type.");
+                throw std::invalid_argument("Unhandle buffer type.");
         }
     }
 }

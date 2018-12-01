@@ -28,6 +28,6 @@ namespace ogl
     private:
         unsigned int bufferType;
 
-        unsigned int vbo;
+        unsigned int vbo = 0;
     };
 }
