@@ -9,7 +9,15 @@ namespace ogl
     public:
         explicit Buffer(GLenum bufferType = GL_ARRAY_BUFFER);
 
+        Buffer(Buffer const &) = delete;
+
+        Buffer(Buffer && other);
+
         ~Buffer();
+
+        Buffer & operator=(Buffer const &) = delete;
+
+        Buffer & operator=(Buffer && other);
 
         void bind();
 

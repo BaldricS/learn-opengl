@@ -1,5 +1,7 @@
 #include "ogl/Buffer.h"
 
+#include <utility>
+
 namespace ogl
 {
     Buffer::Buffer(GLenum bufferType_) :
@@ -8,9 +10,21 @@ namespace ogl
         glGenBuffers(1, &vbo);
     }
 
+    Buffer::Buffer(Buffer && other) :
+        vbo(std::exchange(other.vbo, 0))
+    {
+    }
+
     Buffer::~Buffer()
     {
         glDeleteBuffers(1, &vbo);
+    }
+
+    Buffer & Buffer::operator=(Buffer && other)
+    {
+        vbo = std::exchange(other.vbo, 0);
+
+        return *this;
     }
 
     void Buffer::bind()
