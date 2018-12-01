@@ -58,12 +58,26 @@ namespace ogl
 
     void RenderWindow::run() const
     {
+        init();
+
         while (!glfwWindowShouldClose(window))
         {
+            glClear(GL_COLOR_BUFFER_BIT);
+
+            render();
+
             glfwSwapBuffers(window);
             glfwPollEvents();
-
-            glClear(GL_COLOR_BUFFER_BIT);
         }
+    }
+
+    void RenderWindow::init()
+    {
+        // no-op
+    }
+
+    void RenderWindow::render()
+    {
+        // no-op
     }
 }

@@ -17,7 +17,7 @@ namespace ogl
 
         RenderWindow(RenderWindow && other);
         
-        ~RenderWindow();
+        virtual ~RenderWindow();
 
         RenderWindow & operator=(RenderWindow const &) = delete;
 
@@ -29,5 +29,11 @@ namespace ogl
         GLFWwindow * window = nullptr;
 
         std::unique_ptr<RenderContext> context = nullptr;
+
+        // Called before the render loop.
+        virtual void init();
+
+        // Called once per loop of the render loop.
+        virtual void render();
     };
 }
