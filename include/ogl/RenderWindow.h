@@ -12,6 +12,8 @@ namespace ogl
     {
     public:
         explicit RenderWindow(int majorVersion = 3, int minorVersion = 3, int width = 800, int height = 600);
+        
+        ~RenderWindow();
 
         void run() const;
 

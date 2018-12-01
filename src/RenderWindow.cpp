@@ -37,6 +37,8 @@ namespace ogl
         glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     }
 
+    RenderWindow::~RenderWindow() = default;
+
     void RenderWindow::run() const
     {
         while (!glfwWindowShouldClose(window))
