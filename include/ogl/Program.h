@@ -3,7 +3,7 @@
 namespace ogl
 {
     class Shader;
-    
+
     class Program
     {
     public:
@@ -21,9 +21,13 @@ namespace ogl
 
         void add_shader(Shader const & shader);
 
+        void bind();
+
         unsigned int handle() const;
 
         void link();
+
+        void unbind();
 
     private:
         unsigned int program;

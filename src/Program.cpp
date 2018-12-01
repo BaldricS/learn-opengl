@@ -36,6 +36,11 @@ namespace ogl
         glAttachShader(program, shader.handle());
     }
 
+    void Program::bind()
+    {
+        glUseProgram(program);
+    }
+
     unsigned int Program::handle() const
     {
         return program;
@@ -62,5 +67,10 @@ namespace ogl
         glGetProgramInfoLog(program, logLength, NULL, log.data());
 
         throw std::runtime_error("Error linking program. Error message: " + log);
+    }
+
+    void Program::unbind()
+    {
+        glUseProgram(0);
     }
 }
