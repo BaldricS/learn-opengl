@@ -64,7 +64,7 @@ namespace ogl
         {
             glClear(GL_COLOR_BUFFER_BIT);
 
-            render();
+            render(glfwGetTime());
 
             glfwSwapBuffers(window);
             glfwPollEvents();
@@ -76,7 +76,7 @@ namespace ogl
         // no-op
     }
 
-    void RenderWindow::render()
+    void RenderWindow::render(double)
     {
         // no-op
     }

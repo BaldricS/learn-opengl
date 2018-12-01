@@ -34,6 +34,6 @@ namespace ogl
         virtual void init();
 
         // Called once per loop of the render loop.
-        virtual void render();
+        virtual void render(double elapsedTime);
     };
 }

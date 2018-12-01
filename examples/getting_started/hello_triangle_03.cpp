@@ -41,10 +41,10 @@ void main()
     FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);
 })";
 
-class HelloTriangle : public ogl::RenderWindow
+class App : public ogl::RenderWindow
 {
 public:
-    HelloTriangle() :
+    App() :
         indices(ogl::BufferType::ElementArrayBuffer)
     {
         ogl::Shader vertex(ogl::ShaderType::Vertex, vertex_source);
@@ -93,7 +93,7 @@ private:
         vao.unbind();
     }
 
-    void render() override
+    void render(double) override
     {
         ogl::utils::ScopedBind bind_vao(vao);
 
@@ -107,4 +107,4 @@ private:
     }
 };
 
-RUN_PROGRAM(HelloTriangle)
+RUN_PROGRAM(App)

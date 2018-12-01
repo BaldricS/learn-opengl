@@ -54,16 +54,16 @@ private:
         ogl::utils::ScopedBind bind_vao(vao);
 		ogl::utils::ScopedBind bind_buffer(triangle_data);
         triangle_data.load_data<float>({
-            0.5f, 0.5f, 0.0f,
             0.5f, -0.5f, 0.0f,
-            -0.5f, 0.5f, 0.0f
+            -0.5f, -0.5f, 0.0f,
+            0.0f, 0.5f, 0.0f
         });
 
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
         glEnableVertexAttribArray(0);
     }
 
-    void render() override
+    void render(double) override
     {
         ogl::utils::ScopedBind bind_vao(vao);
         ogl::utils::ScopedBind bind_program(prog);
