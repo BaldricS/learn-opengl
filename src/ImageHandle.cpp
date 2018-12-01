@@ -13,6 +13,7 @@ namespace ogl
             throw std::invalid_argument("Image does not exist at: " + image_path.string());
         }
 
+        stbi_set_flip_vertically_on_load(true);
         image_data = stbi_load(image_path.string().c_str(), &width, &height, &number_channels, 0);
         if (image_data == nullptr)
         {
