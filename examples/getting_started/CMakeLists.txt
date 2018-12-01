@@ -55,3 +55,15 @@ target_link_libraries(HelloTriangle_03
 		ogl
 		ogl_CompileOptions
 )
+
+add_executable(Shaders
+	${CMAKE_CURRENT_SOURCE_DIR}/shaders.cpp
+)
+
+target_link_libraries(Shaders
+	PRIVATE
+		glad::glad
+
+		ogl
+		ogl_CompileOptions
+)
