@@ -25,6 +25,8 @@ add_library(ogl
 	${HEADER_DIR}/Shader.h
 	${HEADER_DIR}/VertexArray.h
 
+	${HEADER_DIR}/utils/ScopedBind.h
+
 	${PRIVATE_DIR}/RenderContext.h
 
 	${SRC_DIR}/Buffer.cpp
