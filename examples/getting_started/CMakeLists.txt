@@ -79,3 +79,15 @@ target_link_libraries(Shaders_01
 		ogl
 		ogl_CompileOptions
 )
+
+add_executable(Shaders_02
+	${CMAKE_CURRENT_SOURCE_DIR}/shaders_02.cpp
+)
+
+target_link_libraries(Shaders_02
+	PRIVATE
+		glad::glad
+
+		ogl
+		ogl_CompileOptions
+)

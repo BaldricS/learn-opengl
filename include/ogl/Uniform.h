@@ -31,6 +31,12 @@ namespace ogl
             glUniform4f(uniformLoc, x, y, z, w);
         }
 
+        template<typename = std::enable_if_t<std::is_floating_point_v<Scalar> && Size == 1>>
+        void set(float x)
+        {
+            glUniform1f(uniformLoc, x);
+        }
+
     private:
         GLint uniformLoc;
     };
