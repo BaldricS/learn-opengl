@@ -1,13 +1,13 @@
 #pragma
 
-#include <glad/glad.h>
+#include "ogl/BufferType.h"
 
 namespace ogl
 {
     class Buffer
     {
     public:
-        explicit Buffer(GLenum bufferType = GL_ARRAY_BUFFER);
+        explicit Buffer(BufferType bufferType = ArrayBuffer);
 
         Buffer(Buffer const &) = delete;
 
@@ -23,11 +23,11 @@ namespace ogl
 
         void unbind();
 
-        GLuint handle() const;
+        unsigned int handle() const;
 
     private:
-        GLenum bufferType;
+        unsigned int bufferType;
 
-        GLuint vbo;
+        unsigned int vbo;
     };
 }

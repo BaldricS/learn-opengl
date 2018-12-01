@@ -1,6 +1,5 @@
 #pragma once
 
-#include <glad/glad.h>
 
 namespace ogl
 {
@@ -15,17 +14,17 @@ namespace ogl
 
         ~VertexArray();
 
-        VertexArray & operator(VertexArray const &) = delete;
+        VertexArray & operator=(VertexArray const &) = delete;
 
-        VertexArray & operator(VertexArray && other);
+        VertexArray & operator=(VertexArray && other);
 
         void bind();
 
-        GLuint handle() const;
+        unsigned int handle() const;
     
         void unbind();
 
     private:
-        GLuint vao;
-    }
+        unsigned int vao;
+    };
 }

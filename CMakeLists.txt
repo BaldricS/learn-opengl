@@ -21,22 +21,23 @@ set(PRIVATE_DIR ${SRC_DIR}/private)
 add_library(ogl
 	${HEADER_DIR}/Buffer.h
 	${HEADER_DIR}/RenderWindow.h
+	${HEADER_DIR}/VertexArray.h
 
 	${PRIVATE_DIR}/RenderContext.h
 
 	${SRC_DIR}/Buffer.cpp
 	${SRC_DIR}/RenderContext.cpp
 	${SRC_DIR}/RenderWindow.cpp
+	${SRC_DIR}/VertexArray.cpp
 )
 
 find_package(glad REQUIRED)
 find_package(glfw3 REQUIRED)
 
 target_link_libraries(ogl
-	PUBLIC
+	PRIVATE
 		glad::glad
 
-	PRIVATE
 		glfw
 
 		logl_CompileOptions

@@ -1,11 +1,27 @@
 #include "ogl/Buffer.h"
 
+#include <glad/glad.h>
+
 #include <utility>
+
+namespace
+{
+    GLenum translateBufferType(ogl::BufferType type)
+    {
+        switch (type)
+        {
+            case ogl::BufferType::ArrayBuffer:
+                return GL_ARRAY_BUFFER;
+            default:
+                throw std::runtime_error("Unhandle buffer type.");
+        }
+    }
+}
 
 namespace ogl
 {
-    Buffer::Buffer(GLenum bufferType_) :
-        bufferType(bufferType_)
+    Buffer::Buffer(BufferType bufferType_) :
+        bufferType(translateBufferType(bufferType_))
     {
         glGenBuffers(1, &vbo);
     }
