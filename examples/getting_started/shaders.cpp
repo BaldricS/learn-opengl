@@ -63,12 +63,14 @@ private:
         glEnableVertexAttribArray(0);
     }
 
-    void render(double) override
+    void render(double elapsedTime) override
     {
         ogl::utils::ScopedBind bind_vao(vao);
         ogl::utils::ScopedBind bind_program(prog);
 
-        color.set(0.5f, 0.0f, 0.0f, 1.0f);
+        double const greenValue = std::sin(elapsedTime) / 2.0 + 0.5;
+
+        color.set(0.0f, static_cast<float>(greenValue), 0.0f, 1.0f);
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
     }
