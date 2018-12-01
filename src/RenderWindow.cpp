@@ -60,7 +60,7 @@ namespace ogl
     {
         init();
 
-        while (!glfwWindowShouldClose(window))
+        while (!glfwWindowShouldClose(window) && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
         {
             glClear(GL_COLOR_BUFFER_BIT);
 
