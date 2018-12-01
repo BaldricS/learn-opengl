@@ -49,7 +49,7 @@ target_link_libraries(ogl
 
 		glfw
 
-		logl_CompileOptions
+		ogl_CompileOptions
 )
 
 target_include_directories(ogl

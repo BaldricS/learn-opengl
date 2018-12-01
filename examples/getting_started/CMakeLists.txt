@@ -5,6 +5,7 @@ add_executable(HelloWindow
 target_link_libraries(HelloWindow
 	PRIVATE
 		ogl
+		ogl_CompileOptions
 )
 
 add_executable(HelloTriangle
@@ -16,4 +17,17 @@ target_link_libraries(HelloTriangle
 		glad::glad
 		
 		ogl
+		ogl_CompileOptions
+)
+
+add_executable(HelloTriangle_01
+	${CMAKE_CURRENT_SOURCE_DIR}/hello_triangle_01.cpp
+)
+
+target_link_libraries(HelloTriangle_01
+	PRIVATE
+		glad::glad
+
+		ogl
+		ogl_CompileOptions
 )
