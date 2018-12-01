@@ -14,7 +14,6 @@ namespace ogl
         }
 
         image_data = stbi_load(image_path.string().c_str(), &width, &height, &number_channels, 0);
-
         if (image_data == nullptr)
         {
             throw std::invalid_argument("Image could not be loaded from: " + image_path.string());
