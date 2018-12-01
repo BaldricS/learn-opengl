@@ -19,5 +19,5 @@ namespace ogl::utils
     
     private:
         Bindable & bindable;
-    }
+    };
 }

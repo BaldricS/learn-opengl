@@ -56,7 +56,7 @@ namespace ogl
         return *this;
     }
 
-    void RenderWindow::run() const
+    void RenderWindow::run()
     {
         init();
 

@@ -23,7 +23,7 @@ namespace ogl
 
         RenderWindow & operator=(RenderWindow && other);
 
-        void run() const;
+        void run();
 
     private:
         GLFWwindow * window = nullptr;

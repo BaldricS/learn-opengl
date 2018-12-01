@@ -11,6 +11,8 @@ namespace ogl
     public:
         explicit Shader(ShaderType shaderType);
 
+        Shader(ShaderType shaderType, std::string const & source);
+
         Shader(Shader const &) = delete;
 
         Shader(Shader && other);

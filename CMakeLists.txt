@@ -25,12 +25,15 @@ add_library(ogl
 	${HEADER_DIR}/Shader.h
 	${HEADER_DIR}/VertexArray.h
 
+	${HEADER_DIR}/utils/MainMacro.h
+	${HEADER_DIR}/utils/ProgramFactory.h
 	${HEADER_DIR}/utils/ScopedBind.h
 
 	${PRIVATE_DIR}/RenderContext.h
 
 	${SRC_DIR}/Buffer.cpp
 	${SRC_DIR}/Program.cpp
+	${SRC_DIR}/ProgramFactory.cpp
 	${SRC_DIR}/RenderContext.cpp
 	${SRC_DIR}/RenderWindow.cpp
 	${SRC_DIR}/Shader.cpp

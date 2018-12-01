@@ -27,9 +27,9 @@ namespace ogl
         unsigned int handle() const;
 
         template<typename T>
-        void load_data(std::vector<T> const & d, BufferUsage usage)
+        void load_data(std::vector<T> const & d, BufferUsage usage = BufferUsage::Static)
         {
-            load_data(d.data(), d.size() * sizeof(T), usage);
+            load_data((void *)d.data(), d.size() * sizeof(T), usage);
         }
 
         void unbind();

@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 
+#include <iostream>
 #include <stdexcept>
 #include <utility>
 
@@ -77,7 +78,7 @@ namespace ogl
     void Buffer::load_data(void * data, std::size_t sizeInBytes, BufferUsage bufferUsage)
     {
         glBufferData(
-            vbo,
+            bufferType,
             static_cast<GLsizeiptr>(sizeInBytes),
             data,
             translateBufferUsage(bufferUsage)

@@ -28,6 +28,12 @@ namespace ogl
     {
     }
 
+    Shader::Shader(ShaderType shaderType, std::string const & source) :
+        Shader(shaderType)
+    {
+        compile(source);
+    }
+
     Shader::Shader(Shader && other) :
         shader(std::exchange(other.shader, 0))
     {
