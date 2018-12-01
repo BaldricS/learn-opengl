@@ -3,7 +3,6 @@
 #include <ogl/Buffer.h>
 #include <ogl/Program.h>
 #include <ogl/RenderWindow.h>
-#include <ogl/Uniform.h>
 #include <ogl/VertexArray.h>
 
 #include <ogl/utils/MainMacro.h>
@@ -16,10 +15,14 @@ std::string vertex_source = R"(
 #version 330 core
 
 layout (location = 0) in vec4 pos;
+layout (location = 1) in vec4 color;
+
+out vec4 ourColor;
 
 void main()
 {
     gl_Position = pos;
+    ourColor = color;
 })";
 
 std::string frag_source = R"(
@@ -27,7 +30,7 @@ std::string frag_source = R"(
 
 out vec4 FragColor;
 
-uniform vec4 ourColor;
+in vec4 ourColor;
 
 void main()
 {
@@ -38,15 +41,13 @@ class App : public ogl::RenderWindow
 {
 public:
     App() :
-        prog(ogl::utils::createProgram(vertex_source, frag_source)),
-        color(prog, "ourColor")
+        prog(ogl::utils::createProgram(vertex_source, frag_source))
     {
     }
 
 private:
     ogl::Buffer triangle_data;
     ogl::Program prog;
-    ogl::Uniform<float, 4> color; // Order dependency with prog
     ogl::VertexArray vao;
     
     void init() override
@@ -54,23 +55,22 @@ private:
         ogl::utils::ScopedBind bind_vao(vao);
 		ogl::utils::ScopedBind bind_buffer(triangle_data);
         triangle_data.load_data<float>({
-            0.5f, -0.5f, 0.0f,
-            -0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
+            0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
+            -0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+            0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f
         });
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
         glEnableVertexAttribArray(0);
+
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
     }
 
-    void render(double elapsedTime) override
+    void render(double) override
     {
         ogl::utils::ScopedBind bind_vao(vao);
         ogl::utils::ScopedBind bind_program(prog);
-
-        double const greenValue = std::sin(elapsedTime) / 2.0 + 0.5;
-
-        color.set(0.0f, static_cast<float>(greenValue), 0.0f, 1.0f);
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
     }
