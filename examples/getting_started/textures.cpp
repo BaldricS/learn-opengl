@@ -19,17 +19,14 @@ std::string vertex_source = R"(
 #version 330 core
 
 layout (location = 0) in vec4 pos;
-layout (location = 1) in vec4 color;
-layout (location = 2) in vec2 uvs;
+layout (location = 1) in vec2 uvs;
 
 out vec2 tex_coords;
-out vec4 vert_color;
 
 void main()
 {
     gl_Position = pos;
     tex_coords = uvs;
-    vert_color = color;
 })";
 
 std::string frag_source = R"(
@@ -37,7 +34,6 @@ std::string frag_source = R"(
 
 out vec4 FragColor;
 
-in vec4 vert_color;
 in vec2 tex_coords;
 
 uniform sampler2D container;
@@ -45,7 +41,7 @@ uniform sampler2D awesome;
 
 void main()
 {
-    FragColor = mix(texture(container, tex_coords), texture(awesome, tex_coords), 0.2) * vert_color;
+    FragColor = mix(texture(container, tex_coords), texture(awesome, tex_coords), 0.2);
 })";
 
 class App : public ogl::RenderWindow
@@ -84,20 +80,17 @@ private:
 
 		ogl::utils::ScopedBind bind_buffer(triangle_data);
         triangle_data.load_data<float>({
-            0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-            0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+            0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+            0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+            -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
         });
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
         glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(3 * sizeof(float)));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
-
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
-        glEnableVertexAttribArray(2);
 
         ogl::utils::ScopedBind bind_element(indices);        
         indices.load_data<unsigned int>({
