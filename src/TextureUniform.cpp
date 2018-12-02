@@ -19,7 +19,7 @@ namespace ogl::textures
         }
     }
     
-    void TextureUniform::activate()
+    void TextureUniform::bind()
     {
         glActiveTexture(GL_TEXTURE0 + texture_unit);
         tex.bind();
@@ -28,5 +28,11 @@ namespace ogl::textures
     void TextureUniform::set_uniform()
     {
         uniform.set(texture_unit);
+    }
+
+    void TextureUniform::unbind()
+    {
+        glActiveTexture(GL_TEXTURE0 + texture_unit);
+        tex.unbind();
     }
 }

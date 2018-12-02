@@ -16,9 +16,11 @@ namespace ogl::textures
     public:
         TextureUniform(Program & prog, std::string const & uniformName, Texture & tex, unsigned char texture_unit);
         
-        void activate();
+        void bind();
 
         void set_uniform();
+
+        void unbind();
 
     private:
         Uniform<int> uniform;
