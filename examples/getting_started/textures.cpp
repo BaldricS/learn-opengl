@@ -23,11 +23,13 @@ layout (location = 1) in vec4 color;
 layout (location = 2) in vec2 uvs;
 
 out vec2 tex_coords;
+out vec4 vert_color;
 
 void main()
 {
     gl_Position = pos;
     tex_coords = uvs;
+    vert_color = color;
 })";
 
 std::string frag_source = R"(
@@ -35,6 +37,7 @@ std::string frag_source = R"(
 
 out vec4 FragColor;
 
+in vec4 vert_color;
 in vec2 tex_coords;
 
 uniform sampler2D container;
@@ -42,7 +45,7 @@ uniform sampler2D awesome;
 
 void main()
 {
-    FragColor = mix(texture(container, tex_coords), texture(awesome, tex_coords), 0.2);
+    FragColor = mix(texture(container, tex_coords), texture(awesome, tex_coords), 0.2) * vert_color;
 })";
 
 class App : public ogl::RenderWindow
@@ -51,11 +54,16 @@ public:
     App() :
         prog(ogl::utils::createProgram(vertex_source, frag_source)),
         indices(ogl::BufferType::ElementArrayBuffer),
-        container("./resources/textures/container.jpg"),
-        awesomeface("./resources/textures/awesomeface.png"),
-        container_uniform(prog, "container", container, 0),
-        awesome_uniform(prog, "awesome", awesomeface, 1)
+        container(),
+        awesomeface(),
+        container_uniform(nullptr),
+        awesome_uniform(nullptr)
     {
+        container.load_data("./resources/textures/container.jpg");
+        awesomeface.load_data("./resources/textures/awesomeface.png");
+
+        container_uniform.reset(new ogl::textures::TextureUniform(prog, "container", container, 0));
+        awesome_uniform.reset(new ogl::textures::TextureUniform(prog, "awesome", awesomeface, 1));
     }
 
 private:
@@ -67,9 +75,8 @@ private:
     ogl::textures::Texture container;
     ogl::textures::Texture awesomeface;
 
-    // Order dependency with program and textures.
-    ogl::textures::TextureUniform container_uniform;
-    ogl::textures::TextureUniform awesome_uniform;
+    std::unique_ptr<ogl::textures::TextureUniform> container_uniform;
+    std::unique_ptr<ogl::textures::TextureUniform> awesome_uniform;
     
     void init() override
     {
@@ -103,14 +110,14 @@ private:
         vao.unbind();
 
         ogl::utils::ScopedBind bind_progam(prog);
-        container_uniform.set();
-        awesome_uniform.set();
+        container_uniform->set();
+        awesome_uniform->set();
     }
 
     void render(double) override
     {
-        ogl::utils::ScopedBind bind_container(container_uniform);
-        ogl::utils::ScopedBind bind_awesome(awesome_uniform);
+        ogl::utils::ScopedBind bind_container(*container_uniform);
+        ogl::utils::ScopedBind bind_awesome(*awesome_uniform);
 
         ogl::utils::ScopedBind bind_vao(vao);
         ogl::utils::ScopedBind bind_program(prog);

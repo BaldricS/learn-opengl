@@ -36,32 +36,9 @@ namespace
 
 namespace ogl::textures
 {
-    Texture::Texture(std::filesystem::path const & imagePath) :
-        Texture(imagePath, getDefaultOptions())
+    Texture::Texture()
     {
-    }
-
-    Texture::Texture(std::filesystem::path const & imagePath, TextureOptions const & options)
-    {
-        ImageHandle img(imagePath);
-
         glGenTextures(1, &texture);
-
-        utils::ScopedBind bind_texture(*this);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLenum>(options.coord_s));
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLenum>(options.coord_t));
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(options.min_filter));
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(options.max_filter));
-
-        GLenum format = getChannels(img.get_channels());
-        glTexImage2D(GL_TEXTURE_2D, 0, format, img.get_width(), img.get_height(), 0, format, GL_UNSIGNED_BYTE, img.get_data());
-
-        if (options.gen_mip_map)
-        {
-            glGenerateMipmap(GL_TEXTURE_2D);
-        }
     }
 
     Texture::Texture(Texture && other) :
@@ -89,6 +66,32 @@ namespace ogl::textures
     GLuint Texture::handle() const
     {
         return texture;
+    }
+
+    void Texture::load_data(std::filesystem::path const & imagePath)
+    {
+        load_data(imagePath, getDefaultOptions());
+    }
+
+    void Texture::load_data(std::filesystem::path const & imagePath, TextureOptions const & options)
+    {
+        ImageHandle img(imagePath);
+
+        utils::ScopedBind bind_texture(*this);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLenum>(options.coord_s));
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLenum>(options.coord_t));
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(options.min_filter));
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLenum>(options.max_filter));
+
+        GLenum format = getChannels(img.get_channels());
+        glTexImage2D(GL_TEXTURE_2D, 0, format, img.get_width(), img.get_height(), 0, format, GL_UNSIGNED_BYTE, img.get_data());
+
+        if (options.gen_mip_map)
+        {
+            glGenerateMipmap(GL_TEXTURE_2D);
+        }
     }
 
     void Texture::unbind()

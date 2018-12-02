@@ -11,9 +11,7 @@ namespace ogl::textures
     class Texture
     {
     public:
-        explicit Texture(std::filesystem::path const & imagePath);
-
-        Texture(std::filesystem::path const & imagePath, TextureOptions const & options);
+        Texture();
 
         Texture(Texture const &) = delete;
 
@@ -28,6 +26,10 @@ namespace ogl::textures
         void bind();
 
         GLuint handle() const;
+
+        void load_data(std::filesystem::path const & imagePath);
+
+        void load_data(std::filesystem::path const & imagePath, TextureOptions const & options);
 
         void unbind();
 

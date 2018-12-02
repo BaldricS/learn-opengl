@@ -4,7 +4,10 @@ namespace ogl::utils
 {
     textures::Texture TextureBuilder::build_texture(std::filesystem::path const & texture_path) const
     {
-        return textures::Texture(texture_path, options);
+        textures::Texture tex;
+        tex.load_data(texture_path, options);
+
+        return tex;
     }
 
     TextureBuilder & TextureBuilder::set_max_filter(textures::TextureMaxFilter max_filter)
