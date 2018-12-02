@@ -1,4 +1,4 @@
-#include "ogl/textures/TextureUniform.h"
+#include "ogl/textures/TextureUnit.h"
 
 #include "ogl/textures/Texture.h"
 
@@ -8,8 +8,7 @@
 
 namespace ogl::textures
 {
-    TextureUniform::TextureUniform(Program & prog, std::string const & uniformName, Texture & tex_, unsigned char texture_unit_) :
-        uniform(prog, uniformName),
+    TextureUnit::TextureUnit(Texture & tex_, unsigned char texture_unit_) :
         tex(tex_),
         texture_unit(texture_unit_)
     {
@@ -19,18 +18,18 @@ namespace ogl::textures
         }
     }
     
-    void TextureUniform::bind()
+    void TextureUnit::bind()
     {
         glActiveTexture(GL_TEXTURE0 + texture_unit);
         tex.bind();
     }
 
-    void TextureUniform::set()
+    void TextureUnit::set(Uniform<int> & uniform)
     {
         uniform.set(texture_unit);
     }
 
-    void TextureUniform::unbind()
+    void TextureUnit::unbind()
     {
         glActiveTexture(GL_TEXTURE0 + texture_unit);
         tex.unbind();

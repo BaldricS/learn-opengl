@@ -6,13 +6,12 @@
 #include <ogl/VertexArray.h>
 
 #include <ogl/textures/Texture.h>
-#include <ogl/textures/TextureUniform.h>
+#include <ogl/textures/TextureUnit.h>
 
 #include <ogl/utils/MainMacro.h>
 #include <ogl/utils/ProgramFactory.h>
 #include <ogl/utils/ScopedBind.h>
 
-#include <memory>
 #include <string>
 
 std::string vertex_source = R"(
@@ -52,14 +51,13 @@ public:
         indices(ogl::BufferType::ElementArrayBuffer),
         container(),
         awesomeface(),
-        container_uniform(nullptr),
-        awesome_uniform(nullptr)
+        container_sampler(prog, "container"),
+        awesome_sampler(prog, "awesome"),
+        container_unit(container, 0),
+        awesome_unit(awesomeface, 1)
     {
         container.load_data("./resources/textures/container.jpg");
         awesomeface.load_data("./resources/textures/awesomeface.png");
-
-        container_uniform.reset(new ogl::textures::TextureUniform(prog, "container", container, 0));
-        awesome_uniform.reset(new ogl::textures::TextureUniform(prog, "awesome", awesomeface, 1));
     }
 
 private:
@@ -71,8 +69,11 @@ private:
     ogl::textures::Texture container;
     ogl::textures::Texture awesomeface;
 
-    std::unique_ptr<ogl::textures::TextureUniform> container_uniform;
-    std::unique_ptr<ogl::textures::TextureUniform> awesome_uniform;
+    ogl::Uniform<int> container_sampler;
+    ogl::Uniform<int> awesome_sampler;
+
+    ogl::textures::TextureUnit container_unit;
+    ogl::textures::TextureUnit awesome_unit;
     
     void init() override
     {
@@ -103,14 +104,14 @@ private:
         vao.unbind();
 
         ogl::utils::ScopedBind bind_progam(prog);
-        container_uniform->set();
-        awesome_uniform->set();
+        container_unit.set(container_sampler);
+        awesome_unit.set(awesome_sampler);
     }
 
     void render(double) override
     {
-        ogl::utils::ScopedBind bind_container(*container_uniform);
-        ogl::utils::ScopedBind bind_awesome(*awesome_uniform);
+        ogl::utils::ScopedBind bind_container(container_unit);
+        ogl::utils::ScopedBind bind_awesome(awesome_unit);
 
         ogl::utils::ScopedBind bind_vao(vao);
         ogl::utils::ScopedBind bind_program(prog);

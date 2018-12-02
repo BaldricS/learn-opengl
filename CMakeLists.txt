@@ -31,7 +31,7 @@ add_library(ogl
 	${HEADER_DIR}/textures/TextureMaxFilter.h
 	${HEADER_DIR}/textures/TextureMinFilter.h
 	${HEADER_DIR}/textures/TextureOptions.h
-	${HEADER_DIR}/textures/TextureUniform.h
+	${HEADER_DIR}/textures/TextureUnit.h
 	${HEADER_DIR}/textures/TextureWrap.h
 
 	${HEADER_DIR}/utils/MainMacro.h
@@ -51,7 +51,7 @@ add_library(ogl
 	${SRC_DIR}/Shader.cpp
 	${SRC_DIR}/Texture.cpp
 	${SRC_DIR}/TextureBuilder.cpp
-	${SRC_DIR}/TextureUniform.cpp
+	${SRC_DIR}/TextureUnit.cpp
 	${SRC_DIR}/VertexArray.cpp
 )
 
