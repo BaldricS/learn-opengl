@@ -37,6 +37,12 @@ namespace ogl
             glUniform1f(uniformLoc, x);
         }
 
+        template<typename = std::enable_if_t<std::is_integral_v<Scalar> && Size == 1>>
+        void set(int v0)
+        {
+            glUniform1i(uniformLoc, v0);
+        }
+
     private:
         GLint uniformLoc;
     };
