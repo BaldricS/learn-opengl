@@ -18,7 +18,7 @@ namespace ogl::textures
         
         void bind();
 
-        void set_uniform();
+        void set();
 
         void unbind();
 

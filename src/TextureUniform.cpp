@@ -25,7 +25,7 @@ namespace ogl::textures
         tex.bind();
     }
 
-    void TextureUniform::set_uniform()
+    void TextureUniform::set()
     {
         uniform.set(texture_unit);
     }
