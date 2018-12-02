@@ -4,8 +4,6 @@
 #include "ogl/textures/TextureMinFilter.h"
 #include "ogl/textures/TextureWrap.h"
 
-#include <glad/glad.h>
-
 namespace ogl::textures
 {
     struct TextureOptions
