@@ -25,7 +25,11 @@ namespace ogl::textures
 
         Texture & operator=(Texture && other);
 
+        void bind();
+
         GLuint handle() const;
+
+        void unbind();
 
     private:
         GLuint texture;

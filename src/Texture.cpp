@@ -2,6 +2,8 @@
 
 #include "ogl/textures/TextureOptions.h"
 
+#include "ogl/utils/ScopedBind.h"
+
 #include "private/ImageHandle.h"
 
 #include <utility>
@@ -44,7 +46,8 @@ namespace ogl::textures
         ImageHandle img(imagePath);
 
         glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
+
+        utils::ScopedBind bind_texture(*this);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLenum>(options.coord_s));
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLenum>(options.coord_t));
@@ -59,8 +62,6 @@ namespace ogl::textures
         {
             glGenerateMipmap(GL_TEXTURE_2D);
         }
-
-        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
     Texture::Texture(Texture && other) :
@@ -80,8 +81,18 @@ namespace ogl::textures
         return *this;
     }
 
+    void Texture::bind()
+    {
+        glBindTexture(GL_TEXTURE_2D, texture);
+    }
+
     GLuint Texture::handle() const
     {
         return texture;
+    }
+
+    void Texture::unbind()
+    {
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 }
