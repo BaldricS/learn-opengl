@@ -15,7 +15,9 @@ function(TargetRegisterTextures TAR)
         list(APPEND TEX_PATHS ${__texture_dir}/${TEX})
     endforeach()
 
+    set(OUTPUT_DIR $<TARGET_FILE_DIR:${TAR}>/resources/textures)
     add_custom_command(TARGET ${TAR} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${REG_TEXTURES} $<TARGET_FILE_DIR:${TAR}>
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${OUTPUT_DIR}
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${TEX_PATHS} ${OUTPUT_DIR}
     )
 endfunction()

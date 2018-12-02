@@ -103,3 +103,21 @@ target_link_libraries(Shaders_03
 		ogl
 		ogl_CompileOptions
 )
+
+add_executable(Textures
+	${CMAKE_CURRENT_SOURCE_DIR}/textures.cpp
+)
+
+target_link_libraries(Textures
+	PRIVATE
+		glad::glad
+
+		ogl
+		ogl_CompileOptions
+)
+
+TargetRegisterTextures(Textures
+	TEXTURES
+		awesomeface.png
+		container.jpg
+)
