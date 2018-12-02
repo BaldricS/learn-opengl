@@ -9,7 +9,9 @@ namespace ogl::textures
     class Texture
     {
     public:
-        Texture();
+        explicit Texture(std::filesystem::path const & imagePath);
+
+        Texture(std::filesystem::path const & imagePath, TextureOptions const & options);
 
         Texture(Texture const &) = delete;
 

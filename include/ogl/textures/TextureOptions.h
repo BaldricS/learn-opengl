@@ -10,5 +10,6 @@ namespace ogl::textures
         TextureWrap textureCoordT =  TextureWrap::GL_REPEAT;
         TextureMinFilter minFilter = TextureMinFilter::Linear;
         TextureMaxFilter maxFilter = TextureMaxFilter::Linear;
+        bool generateMipMap = true;
     };
 }

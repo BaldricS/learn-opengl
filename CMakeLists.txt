@@ -23,16 +23,19 @@ add_library(ogl
 	${HEADER_DIR}/Program.h
 	${HEADER_DIR}/RenderWindow.h
 	${HEADER_DIR}/Shader.h
-	${HEADER_DIR}/Texture.h
-	${HEADER_DIR}/TextureMaxFilter.h
-	${HEADER_DIR}/TextureMinFilter.h
-	${HEADER_DIR}/TextureWrap.h
 	${HEADER_DIR}/Uniform.h
 	${HEADER_DIR}/VertexArray.h
+
+	${HEADER_DIR}/textures/Texture.h
+	${HEADER_DIR}/textures/TextureMaxFilter.h
+	${HEADER_DIR}/textures/TextureMinFilter.h
+	${HEADER_DIR}/textures/TextureOptions.h
+	${HEADER_DIR}/textures/TextureWrap.h
 
 	${HEADER_DIR}/utils/MainMacro.h
 	${HEADER_DIR}/utils/ProgramFactory.h
 	${HEADER_DIR}/utils/ScopedBind.h
+	${HEADER_DIR}/utils/TextureBuilder.h
 
 	${PRIVATE_DIR}/ImageHandle.h
 	${PRIVATE_DIR}/RenderContext.h
@@ -45,7 +48,7 @@ add_library(ogl
 	${SRC_DIR}/RenderWindow.cpp
 	${SRC_DIR}/Shader.cpp
 	${SRC_DIR}/Texture.cpp
-	${SRC_DIR}/Shader.cpp
+	${SRC_DIR}/TextureBuilder.cpp
 	${SRC_DIR}/VertexArray.cpp
 )
 
