@@ -6,6 +6,8 @@
 
 namespace ogl::textures
 {
+    struct TextureOptions;
+
     class Texture
     {
     public:
@@ -19,9 +21,9 @@ namespace ogl::textures
 
         ~Texture();
 
-        Texture & operator(Texture const &) = delete;
+        Texture & operator=(Texture const &) = delete;
 
-        Texture & operator(Texture && other);
+        Texture & operator=(Texture && other);
 
         GLuint handle() const;
 
