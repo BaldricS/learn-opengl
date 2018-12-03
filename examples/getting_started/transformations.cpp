@@ -114,21 +114,21 @@ private:
         ogl::utils::ScopedBind bind_progam(prog);
         container_unit.set(container_sampler);
         awesome_unit.set(awesome_sampler);
-
-        glm::mat4 trans(1.0f);
-        trans = glm::rotate(trans, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-        trans = glm::scale(trans, glm::vec3(0.5f));
-
-        transform_uniform.set(trans);
     }
 
-    void render(double) override
+    void render(double elapsedTime) override
     {
         ogl::utils::ScopedBind bind_container(container_unit);
         ogl::utils::ScopedBind bind_awesome(awesome_unit);
 
         ogl::utils::ScopedBind bind_vao(vao);
         ogl::utils::ScopedBind bind_program(prog);
+
+        glm::mat4 trans(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        trans = glm::rotate(trans, static_cast<float>(elapsedTime), glm::vec3(0.0f, 0.0f, 1.0f));
+
+        transform_uniform.set(trans);
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
