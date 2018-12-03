@@ -12,6 +12,10 @@
 #include <ogl/utils/ProgramFactory.h>
 #include <ogl/utils/ScopedBind.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <string>
 
 std::string vertex_source = R"(
@@ -22,9 +26,11 @@ layout (location = 1) in vec2 uvs;
 
 out vec2 tex_coords;
 
+uniform mat4 transform;
+
 void main()
 {
-    gl_Position = pos;
+    gl_Position = transform * pos;
     tex_coords = uvs;
 })";
 
@@ -51,6 +57,7 @@ public:
         indices(ogl::BufferType::ElementArrayBuffer),
         container(),
         awesomeface(),
+        transform_uniform(prog, "transform"),
         container_sampler(prog, "container"),
         awesome_sampler(prog, "awesome"),
         container_unit(container, 0),
@@ -69,6 +76,7 @@ private:
     ogl::textures::Texture container;
     ogl::textures::Texture awesomeface;
 
+    ogl::Uniform<glm::mat4> transform_uniform;
     ogl::Uniform<int> container_sampler;
     ogl::Uniform<int> awesome_sampler;
 
@@ -77,8 +85,6 @@ private:
     
     void init() override
     {
-        ogl::Uniform<glm::mat4> test(prog, "test");
-        test.set(glm::mat4());
         vao.bind();
 
 		ogl::utils::ScopedBind bind_buffer(triangle_data);
@@ -108,6 +114,12 @@ private:
         ogl::utils::ScopedBind bind_progam(prog);
         container_unit.set(container_sampler);
         awesome_unit.set(awesome_sampler);
+
+        glm::mat4 trans(1.0f);
+        trans = glm::rotate(trans, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        trans = glm::scale(trans, glm::vec3(0.5f));
+
+        transform_uniform.set(trans);
     }
 
     void render(double) override
