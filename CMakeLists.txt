@@ -57,11 +57,14 @@ add_library(ogl
 
 find_package(glad REQUIRED)
 find_package(glfw3 REQUIRED)
+find_package(glm REQUIRED)
 find_package(stb REQUIRED)
 
 target_link_libraries(ogl
 	PUBLIC
 		glad::glad
+
+		glm
 
 	PRIVATE
 		glfw

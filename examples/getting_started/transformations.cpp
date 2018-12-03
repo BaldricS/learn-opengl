@@ -77,6 +77,8 @@ private:
     
     void init() override
     {
+        ogl::Uniform<glm::mat4> test(prog, "test");
+        test.set(glm::mat4());
         vao.bind();
 
 		ogl::utils::ScopedBind bind_buffer(triangle_data);
