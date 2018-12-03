@@ -179,3 +179,23 @@ TargetRegisterTextures(Transformations_01
 		awesomeface.png
 		container.jpg
 )
+
+add_executable(Transformations_02
+	${CMAKE_CURRENT_SOURCE_DIR}/transformations_02.cpp
+)
+
+target_link_libraries(Transformations_02
+	PRIVATE
+		glad::glad
+
+		glm
+
+		ogl
+		ogl_CompileOptions
+)
+
+TargetRegisterTextures(Transformations_02
+	TEXTURES
+		awesomeface.png
+		container.jpg
+)
