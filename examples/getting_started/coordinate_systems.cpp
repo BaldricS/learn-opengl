@@ -53,7 +53,6 @@ class App : public ogl::RenderWindow
 {
 public:
     App() :
-        indices(ogl::BufferType::ElementArrayBuffer),
         prog(ogl::utils::createProgram(vertex_source, frag_source)),
         container(),
         awesomeface(),
@@ -69,7 +68,6 @@ public:
 
 private:
     ogl::Buffer triangle_data;
-    ogl::Buffer indices;
     ogl::Program prog;
     ogl::VertexArray vao;
 
@@ -85,14 +83,51 @@ private:
     
     void init() override
     {
-        vao.bind();
-
+        ogl::utils::ScopedBind bind_vao(vao);
 		ogl::utils::ScopedBind bind_buffer(triangle_data);
+
         triangle_data.load_data<float>({
-            0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
-            0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-            -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+             -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+            0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+            0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+            0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+            -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+            0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+            0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+            0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+            -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+            -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+            -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+            -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+            0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+            0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+            0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+            0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+            0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+            0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+            0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+            0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+            0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+            -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+            -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+            0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+            0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+            0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+            -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+            -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
         });
 
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
@@ -101,34 +136,12 @@ private:
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
         glEnableVertexAttribArray(1);
 
-        ogl::utils::ScopedBind bind_element(indices);        
-        indices.load_data<unsigned int>({
-            0, 1, 3,
-            1, 2, 3
-        });
-
-        // VAO needs to be unbound before an element array buffer is unbound.
-        // This means we can't use our fancy ScopedBind util. Oh well.
-        vao.unbind();
-
         ogl::utils::ScopedBind bind_progam(prog);
         container_unit.set(container_sampler);
         awesome_unit.set(awesome_sampler);
-
-        glm::mat4 model(1.0f);
-        model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-
-        glm::mat4 view(1.0f);
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-
-        float constexpr screenRatio = 800.0f / 600.0f;
-        glm::mat4 projection(1.0f);
-        projection = glm::perspective(glm::radians(45.0f), screenRatio, 0.1f, 100.0f);
-
-        transform_uniform.set(projection * view * model);
     }
 
-    void render(double) override
+    void render(double elapsedTime) override
     {
         ogl::utils::ScopedBind bind_container(container_unit);
         ogl::utils::ScopedBind bind_awesome(awesome_unit);
@@ -136,7 +149,18 @@ private:
         ogl::utils::ScopedBind bind_vao(vao);
         ogl::utils::ScopedBind bind_program(prog);
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glm::mat4 model(1.0f);
+        model = glm::rotate(model, static_cast<float>(elapsedTime) * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+
+        glm::mat4 view(1.0f);
+        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+        glm::mat4 projection(1.0f);
+        projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
+        transform_uniform.set(projection * view * model);
+
+        glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 };
 
