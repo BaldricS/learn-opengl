@@ -1,4 +1,4 @@
-#pragma
+#pragma once
 
 #include "ogl/BufferType.h"
 #include "ogl/BufferUsage.h"

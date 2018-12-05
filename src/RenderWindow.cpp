@@ -21,6 +21,11 @@ namespace ogl
     RenderWindow::RenderWindow(int majorVersion, int minorVersion, int width, int height) :
         context(new RenderContext(majorVersion, minorVersion))
     {
+        glfwInit();
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, majorVersion);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorVersion);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
         window = glfwCreateWindow(width, height, "Render Window", NULL, NULL);
         if (window == nullptr)
         {
@@ -46,7 +51,7 @@ namespace ogl
     {
     }
 
-    RenderWindow::~RenderWindow() = default;
+    RenderWindow::~RenderWindow() {}
 
     RenderWindow & RenderWindow::operator=(RenderWindow && other)
     {

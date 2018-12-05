@@ -199,3 +199,23 @@ TargetRegisterTextures(Transformations_02
 		awesomeface.png
 		container.jpg
 )
+
+add_executable(Coordinate_Systems
+	${CMAKE_CURRENT_SOURCE_DIR}/coordinate_systems.cpp
+)
+
+target_link_libraries(Coordinate_Systems
+	PRIVATE
+		glad::glad
+
+		glm
+
+		ogl
+		ogl_CompileOptions
+)
+
+TargetRegisterTextures(Coordinate_Systems
+	TEXTURES
+		awesomeface.png
+		container.jpg
+)

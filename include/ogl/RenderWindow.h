@@ -28,7 +28,7 @@ namespace ogl
     private:
         GLFWwindow * window = nullptr;
 
-        std::unique_ptr<RenderContext> context = nullptr;
+        std::unique_ptr<RenderContext> context;
 
         // Called before the render loop.
         virtual void init();
