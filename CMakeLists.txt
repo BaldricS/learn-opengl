@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 project(LearnOpenGL LANGUAGES CXX)
 
@@ -86,6 +86,18 @@ target_link_libraries(ogl
 		ogl_CompileOptions
 
 		stb::stb
+)
+
+target_include_directories(ogl SYSTEM
+	PUBLIC
+		$<TARGET_PROPERTY:glad::glad,INTERFACE_INCLUDE_DIRECTORIES>
+
+		$<TARGET_PROPERTY:glm,INTERFACE_INCLUDE_DIRECTORIES>
+
+	PRIVATE
+		$<TARGET_PROPERTY:glfw,INTERFACE_INCLUDE_DIRECTORIES>
+
+		$<TARGET_PROPERTY:stb::stb,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
 target_include_directories(ogl

@@ -16,9 +16,9 @@ namespace ogl::uniforms
     public:
         Location(shaders::Program const & prog, std::string const & uniform_name);
 
-        GLuint get_location() const;
+        GLint get_location() const;
 
     private:
-        GLuint loc;
+        GLint loc;
     };
 }

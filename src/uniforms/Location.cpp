@@ -15,7 +15,7 @@ namespace ogl::uniforms
         }
     }
 
-    GLuint Location::get_location() const
+    GLint Location::get_location() const
     {
         return loc;
     }
