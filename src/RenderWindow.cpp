@@ -3,13 +3,24 @@
 #include "private/RenderContext.h"
 
 #include <glad/glad.h>
+
 #include <GLFW/glfw3.h>
 
+#include <cassert>
 #include <stdexcept>
 #include <utility>
 
 namespace
 {
+    ogl::RenderWindow * get_render(GLFWwindow * window)
+    {
+        void * render = glfwGetWindowUserPointer(window);
+
+        assert(render != nullptr);
+
+        return static_cast<ogl::RenderWindow *>(render);
+    }
+
     void framebuffer_size_callback(GLFWwindow *, int width, int height)
     {
         glViewport(0, 0, width, height);
@@ -21,11 +32,6 @@ namespace ogl
     RenderWindow::RenderWindow(int majorVersion, int minorVersion, int width, int height) :
         context(new RenderContext(majorVersion, minorVersion))
     {
-        glfwInit();
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, majorVersion);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minorVersion);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
         window = glfwCreateWindow(width, height, "Render Window", NULL, NULL);
         if (window == nullptr)
         {
@@ -38,8 +44,9 @@ namespace ogl
             throw std::runtime_error("Failed to initialize GLAD");
         }
 
-        glViewport(0, 0, width, height);
+        glfwSetWindowUserPointer(window, this);
 
+        glViewport(0, 0, width, height);
         glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -51,7 +58,7 @@ namespace ogl
     {
     }
 
-    RenderWindow::~RenderWindow() {}
+    RenderWindow::~RenderWindow() = default;
 
     RenderWindow & RenderWindow::operator=(RenderWindow && other)
     {
