@@ -18,9 +18,9 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 #include <string>
+#include <vector>
 
 std::string vertex_source = R"(
 #version 330 core
@@ -92,7 +92,7 @@ private:
 		ogl::utils::ScopedBind bind_buffer(triangle_data);
 
         triangle_data.load_data<float>({
-             -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+            -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
             0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
             0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
             0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -146,7 +146,7 @@ private:
         awesome_sampler.set(awesome_unit);
     }
 
-    void render(double elapsedTime) override
+    void render(double) override
     {
         ogl::utils::ScopedBind bind_container(container_unit);
         ogl::utils::ScopedBind bind_awesome(awesome_unit);
@@ -154,8 +154,18 @@ private:
         ogl::utils::ScopedBind bind_vao(vao);
         ogl::utils::ScopedBind bind_program(prog);
 
-        glm::mat4 model(1.0f);
-        model = glm::rotate(model, static_cast<float>(elapsedTime) * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+        static std::vector<glm::vec3> const cube_positions {
+            { 0.0f, 0.0f, 0.0f },
+            { 2.0f, 5.0f, -15.0f },
+            { -1.5f, -2.2f, -2.5f },
+            { -3.8f, -2.0f, -12.3f },
+            { 2.4f, -0.4f, -3.5f },
+            { -1.7f, 3.0f, -7.5f },
+            { 1.3f, -2.0f, -2.5f },
+            { 1.5f, 2.0f, -2.5f },
+            { 1.5f, 0.2f, -1.5f },
+            { -1.3f, 1.0f, -1.5f }
+        };
 
         glm::mat4 view(1.0f);
         view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
@@ -163,9 +173,18 @@ private:
         glm::mat4 projection(1.0f);
         projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 
-        transform_uniform.set(projection * view * model);
+        for (std::size_t i = 0; i < cube_positions.size(); ++i)
+        {
+            float const angleDegrees = 20.0f * i;
 
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+            glm::mat4 model(1.0f);
+            model = glm::translate(model, cube_positions[i]);
+            model = glm::rotate(model, glm::radians(angleDegrees), glm::vec3(1.0f, 0.3f, 0.5f));
+
+            transform_uniform.set(projection * view * model);
+
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
     }
 };
 
