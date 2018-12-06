@@ -1,12 +1,15 @@
 #include <glad/glad.h>
 
 #include <ogl/Buffer.h>
-#include <ogl/Program.h>
 #include <ogl/RenderWindow.h>
 #include <ogl/VertexArray.h>
 
+#include <ogl/shaders/Program.h>
+
 #include <ogl/textures/Texture.h>
 #include <ogl/textures/TextureUnit.h>
+
+#include <ogl/uniforms/Sampler2D.h>
 
 #include <ogl/utils/MainMacro.h>
 #include <ogl/utils/ProgramFactory.h>
@@ -64,14 +67,15 @@ public:
 private:
     ogl::Buffer triangle_data;
     ogl::Buffer indices;
-    ogl::Program prog;
     ogl::VertexArray vao;
+
+    ogl::shaders::Program prog;
 
     ogl::textures::Texture container;
     ogl::textures::Texture awesomeface;
 
-    ogl::Uniform<int> container_sampler;
-    ogl::Uniform<int> awesome_sampler;
+    ogl::uniforms::Sampler2D container_sampler;
+    ogl::uniforms::Sampler2D awesome_sampler;
 
     ogl::textures::TextureUnit container_unit;
     ogl::textures::TextureUnit awesome_unit;
@@ -105,8 +109,8 @@ private:
         vao.unbind();
 
         ogl::utils::ScopedBind bind_progam(prog);
-        container_unit.set(container_sampler);
-        awesome_unit.set(awesome_sampler);
+        container_sampler.set(container_unit);
+        awesome_sampler.set(awesome_unit);
     }
 
     void render(double) override

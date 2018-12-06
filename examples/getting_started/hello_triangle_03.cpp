@@ -1,10 +1,12 @@
 #include <glad/glad.h>
 
 #include <ogl/Buffer.h>
-#include <ogl/Program.h>
 #include <ogl/RenderWindow.h>
-#include <ogl/Shader.h>
 #include <ogl/VertexArray.h>
+
+#include <ogl/shaders/Program.h>
+#include <ogl/shaders/Shader.h>
+#include <ogl/shaders/ShaderType.h>
 
 #include <ogl/utils/MainMacro.h>
 #include <ogl/utils/ScopedBind.h>
@@ -47,9 +49,9 @@ public:
     App() :
         indices(ogl::BufferType::ElementArrayBuffer)
     {
-        ogl::Shader vertex(ogl::ShaderType::Vertex, vertex_source);
-        ogl::Shader frag_orange(ogl::ShaderType::Fragment, frag_source);
-        ogl::Shader frag_yellow(ogl::ShaderType::Fragment, frag_yellow_src);
+        ogl::shaders::Shader vertex(ogl::shaders::ShaderType::Vertex, vertex_source);
+        ogl::shaders::Shader frag_orange(ogl::shaders::ShaderType::Fragment, frag_source);
+        ogl::shaders::Shader frag_yellow(ogl::shaders::ShaderType::Fragment, frag_yellow_src);
 
         prog_orange.add_shader(frag_orange);
         prog_orange.add_shader(vertex);
@@ -63,9 +65,10 @@ public:
 private:
     ogl::Buffer triangle_data;
     ogl::Buffer indices;
-    ogl::Program prog_orange;
-    ogl::Program prog_yellow;
     ogl::VertexArray vao;
+
+    ogl::shaders::Program prog_orange;
+    ogl::shaders::Program prog_yellow;
     
     void init() override
     {

@@ -31,6 +31,7 @@ add_library(ogl
 	${HEADER_DIR}/textures/TextureUnit.h
 	${HEADER_DIR}/textures/TextureWrap.h
 
+	${HEADER_DIR}/uniforms/Float.h
 	${HEADER_DIR}/uniforms/Location.h
 	${HEADER_DIR}/uniforms/Mat4.h
 	${HEADER_DIR}/uniforms/Sampler2D.h
@@ -55,6 +56,7 @@ add_library(ogl
 	${SRC_DIR}/textures/Texture.cpp
 	${SRC_DIR}/textures/TextureUnit.cpp
 
+	${SRC_DIR}/uniforms/Float.cpp
 	${SRC_DIR}/uniforms/Location.cpp
 	${SRC_DIR}/uniforms/Mat4.cpp
 	${SRC_DIR}/uniforms/Sampler2D.cpp

@@ -1,9 +1,10 @@
 #include <glad/glad.h>
 
 #include <ogl/Buffer.h>
-#include <ogl/Program.h>
 #include <ogl/RenderWindow.h>
 #include <ogl/VertexArray.h>
+
+#include <ogl/shaders/Program.h>
 
 #include <ogl/utils/MainMacro.h>
 #include <ogl/utils/ProgramFactory.h>
@@ -42,9 +43,10 @@ public:
 private:
     ogl::Buffer triangle_one;
     ogl::Buffer triangle_two;
-    ogl::Program prog;
     ogl::VertexArray vao_one;
     ogl::VertexArray vao_two;
+
+    ogl::shaders::Program prog;
 
     void load_triangle(std::vector<float> const & data, ogl::VertexArray & vao, ogl::Buffer & buffer)
     {

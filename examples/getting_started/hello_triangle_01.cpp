@@ -1,9 +1,10 @@
 #include <glad/glad.h>
 
 #include <ogl/Buffer.h>
-#include <ogl/Program.h>
 #include <ogl/RenderWindow.h>
 #include <ogl/VertexArray.h>
+
+#include <ogl/shaders/Program.h>
 
 #include <ogl/utils/MainMacro.h>
 #include <ogl/utils/ProgramFactory.h>
@@ -41,8 +42,9 @@ public:
 
 private:
     ogl::Buffer triangle_data;
-    ogl::Program prog;
     ogl::VertexArray vao;
+
+    ogl::shaders::Program prog;
     
     void init() override
     {
