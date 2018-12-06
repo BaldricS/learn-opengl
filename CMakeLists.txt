@@ -20,12 +20,11 @@ set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 set(PRIVATE_DIR ${SRC_DIR}/private)
 
 add_library(ogl
-	${HEADER_DIR}/Buffer.h
-	${HEADER_DIR}/Program.h
-	${HEADER_DIR}/RenderWindow.h
-	${HEADER_DIR}/Shader.h
-	${HEADER_DIR}/Uniform.h
-	${HEADER_DIR}/VertexArray.h
+	${HEADER_DIR}/shaders/Program.h
+	${HEADER_DIR}/shaders/SamplerUniform.h
+	${HEADER_DIR}/shaders/Shader.h
+	${HEADER_DIR}/shaders/ShaderType.h
+	${HEADER_DIR}/shaders/UniformLocation.h
 
 	${HEADER_DIR}/textures/Texture.h
 	${HEADER_DIR}/textures/TextureMaxFilter.h
@@ -39,19 +38,30 @@ add_library(ogl
 	${HEADER_DIR}/utils/ScopedBind.h
 	${HEADER_DIR}/utils/TextureBuilder.h
 
+	${HEADER_DIR}/Buffer.h
+	${HEADER_DIR}/BufferType.h
+	${HEADER_DIR}/BufferUsage.h
+	${HEADER_DIR}/RenderWindow.h
+	${HEADER_DIR}/VertexArray.h
+
 	${PRIVATE_DIR}/ImageHandle.h
 	${PRIVATE_DIR}/RenderContext.h
 
+	${SRC_DIR}/shaders/Program.cpp
+	${SRC_DIR}/shaders/SamplerUniform.cpp
+	${SRC_DIR}/shaders/Shader.cpp
+	${SRC_DIR}/shaders/UniformLocation.cpp
+
+	${SRC_DIR}/textures/Texture.cpp
+	${SRC_DIR}/textures/TextureUnit.cpp
+
+	${SRC_DIR}/utils/ProgramFactory.cpp
+	${SRC_DIR}/utils/TextureBuilder.cpp
+
 	${SRC_DIR}/Buffer.cpp
 	${SRC_DIR}/ImageHandle.cpp
-	${SRC_DIR}/Program.cpp
-	${SRC_DIR}/ProgramFactory.cpp
 	${SRC_DIR}/RenderContext.cpp
 	${SRC_DIR}/RenderWindow.cpp
-	${SRC_DIR}/Shader.cpp
-	${SRC_DIR}/Texture.cpp
-	${SRC_DIR}/TextureBuilder.cpp
-	${SRC_DIR}/TextureUnit.cpp
 	${SRC_DIR}/VertexArray.cpp
 )
 

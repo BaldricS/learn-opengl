@@ -1,11 +1,11 @@
-#include "ogl/Program.h"
+#include "ogl/shaders/Program.h"
 
-#include "ogl/Shader.h"
+#include "ogl/shaders/Shader.h"
 
 #include <stdexcept>
 #include <utility>
 
-namespace ogl
+namespace ogl::shaders
 {
     Program::Program() :
         program(glCreateProgram())

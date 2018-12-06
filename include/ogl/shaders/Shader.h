@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ogl/ShaderType.h"
+#include "ogl/shaders/ShaderType.h"
 
 #include <glad/glad.h>
 
 #include <string>
 
-namespace ogl
+namespace ogl::shaders
 {
     class Shader
     {

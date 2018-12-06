@@ -1,9 +1,9 @@
-#include "ogl/Shader.h"
+#include "ogl/shaders/Shader.h"
 
 #include <stdexcept>
 #include <utility>
 
-namespace ogl
+namespace ogl::shaders
 {
     Shader::Shader(ShaderType shaderType) :
         shader(glCreateShader(static_cast<GLenum>(shaderType)))

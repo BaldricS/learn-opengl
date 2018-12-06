@@ -24,9 +24,9 @@ namespace ogl::textures
         tex.bind();
     }
 
-    void TextureUnit::set(Uniform<int> & uniform)
+    unsigned char TextureUnit::get_texture_unit() const
     {
-        uniform.set(texture_unit);
+        return texture_unit;
     }
 
     void TextureUnit::unbind()

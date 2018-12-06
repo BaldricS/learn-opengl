@@ -1,7 +1,5 @@
 #pragma once
 
-#include "ogl/Uniform.h"
-
 namespace ogl::textures
 {
     class Texture;
@@ -13,7 +11,7 @@ namespace ogl::textures
         
         void bind();
 
-        void set(Uniform<int> & samplerUniform);
+        unsigned char get_texture_unit() const;
 
         void unbind();
 

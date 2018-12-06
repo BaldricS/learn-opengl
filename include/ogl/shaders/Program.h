@@ -2,7 +2,7 @@
 
 #include <glad/glad.h>
 
-namespace ogl
+namespace ogl::shaders
 {
     class Shader;
 
