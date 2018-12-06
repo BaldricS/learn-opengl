@@ -7,11 +7,14 @@
 namespace ogl::shaders
 {
     class Program;
+}
 
-    class UniformLocation
+namespace ogl::uniforms
+{
+    class Location
     {
     public:
-        UniformLocation(Program const & prog, std::string const & uniform_name);
+        Location(shaders::Program const & prog, std::string const & uniform_name);
 
         GLuint get_location() const;
 

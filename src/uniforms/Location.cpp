@@ -1,12 +1,12 @@
-#include "ogl/shaders/UniformLocation.h"
+#include "ogl/uniforms/Location.h"
 
 #include "ogl/shaders/Program.h"
 
 #include <stdexcept>
 
-namespace ogl::shaders
+namespace ogl::uniforms
 {
-    UniformLocation::UniformLocation(Program const & prog, std::string const & uniform_name) :
+    Location::Location(shaders::Program const & prog, std::string const & uniform_name) :
         loc(glGetUniformLocation(prog.handle(), uniform_name.c_str()))
     {
         if (loc == -1)
@@ -15,7 +15,7 @@ namespace ogl::shaders
         }
     }
 
-    GLuint UniformLocation::get_location() const
+    GLuint Location::get_location() const
     {
         return loc;
     }

@@ -21,10 +21,8 @@ set(PRIVATE_DIR ${SRC_DIR}/private)
 
 add_library(ogl
 	${HEADER_DIR}/shaders/Program.h
-	${HEADER_DIR}/shaders/SamplerUniform.h
 	${HEADER_DIR}/shaders/Shader.h
 	${HEADER_DIR}/shaders/ShaderType.h
-	${HEADER_DIR}/shaders/UniformLocation.h
 
 	${HEADER_DIR}/textures/Texture.h
 	${HEADER_DIR}/textures/TextureMaxFilter.h
@@ -32,6 +30,9 @@ add_library(ogl
 	${HEADER_DIR}/textures/TextureOptions.h
 	${HEADER_DIR}/textures/TextureUnit.h
 	${HEADER_DIR}/textures/TextureWrap.h
+
+	${HEADER_DIR}/uniforms/Location.h
+	${HEADER_DIR}/uniforms/Sampler2D.h
 
 	${HEADER_DIR}/utils/MainMacro.h
 	${HEADER_DIR}/utils/ProgramFactory.h
@@ -48,12 +49,13 @@ add_library(ogl
 	${PRIVATE_DIR}/RenderContext.h
 
 	${SRC_DIR}/shaders/Program.cpp
-	${SRC_DIR}/shaders/SamplerUniform.cpp
 	${SRC_DIR}/shaders/Shader.cpp
-	${SRC_DIR}/shaders/UniformLocation.cpp
 
 	${SRC_DIR}/textures/Texture.cpp
 	${SRC_DIR}/textures/TextureUnit.cpp
+
+	${SRC_DIR}/uniforms/Location.cpp
+	${SRC_DIR}/uniforms/Sampler2D.cpp
 
 	${SRC_DIR}/utils/ProgramFactory.cpp
 	${SRC_DIR}/utils/TextureBuilder.cpp
