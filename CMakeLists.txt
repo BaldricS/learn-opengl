@@ -90,7 +90,7 @@ target_link_libraries(ogl
 
 target_include_directories(ogl
 	PUBLIC
-		${CMAKE_SOURCE_DIR}/include
+		$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
 	PRIVATE
 		${CMAKE_SOURCE_DIR}/src
 )
