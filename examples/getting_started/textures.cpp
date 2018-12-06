@@ -50,8 +50,8 @@ class App : public ogl::RenderWindow
 {
 public:
     App() :
-        prog(ogl::utils::createProgram(vertex_source, frag_source)),
         indices(ogl::BufferType::ElementArrayBuffer),
+        prog(ogl::utils::createProgram(vertex_source, frag_source)),
         container(),
         awesomeface(),
         container_sampler(prog, "container"),
@@ -70,6 +70,7 @@ private:
 
     ogl::shaders::Program prog;
 
+    // Order dependency's abound.
     ogl::textures::Texture container;
     ogl::textures::Texture awesomeface;
 

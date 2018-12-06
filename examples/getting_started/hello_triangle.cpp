@@ -36,8 +36,8 @@ class App : public ogl::RenderWindow
 {
 public:
     App() :
-        prog(ogl::utils::createProgram(vertex_source, frag_source)),
-        indices(ogl::BufferType::ElementArrayBuffer)
+        indices(ogl::BufferType::ElementArrayBuffer),
+        prog(ogl::utils::createProgram(vertex_source, frag_source))
     {
     }
 
